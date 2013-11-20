@@ -1,0 +1,77 @@
+<TMPL_INCLUDE NAME = "../../templates/headers/header.tmpl">
+
+<div style="width: 1000px" class="contentBox" id="testLora">
+    <div class="contentHeader ui-widget-header"><span>LORA Test</span></div>
+    <div class="contentBody ui-widget-content">
+        <strong>Configuration Management</strong>
+        <div style="margin-top: 5px;">
+            Save As: <input type="text" id="test-saveAs" /> <button id="test-save">Save</button>
+            
+            &nbsp;&nbsp;&nbsp; Load Existing:
+            <select id="test-loadExisting">
+                <optgroup label="User Saved" id="test-loadExisting-userSaved">
+                    <option value="noneAvailable">-- No User Saved Configurations--</option>
+                </optgroup>
+                
+                <optgroup label="Auto Saved (Last 10)" id="test-loadExisting-autoSaved">
+                    <option value="noneAvailable">-- No Auto Saved Configurations--</option>
+                </optgroup>
+            </select>
+            
+            <button id="test-load">Load</button>
+        </div>
+        <hr width="100%"/>
+        <table width="100%" class="testLoraTable">
+            <tr>
+                <td width=200><strong>URL</strong> (e.g., /user/ME/queue):</td><td><input style="width: 100%" value="/user/ME/queue" type="text" id="test-url"/></td>
+            </tr>
+            <tr>
+                <td><strong>HTTP Verb:</strong></td>
+                <td colspan=2>
+                    <select id="test-httpVerb">
+                        <option>GET</option>
+                        <option>POST</option>
+                        <option>DELETE</option>
+                        <option>PUT</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="paramDataRow">
+                <td valign=top>
+                    <strong>Parameters:</strong>
+                </td>
+                <td width=430 class="keyValCol">
+                    <div class="keyValDiv">Key: <input type="text" class="test-param-key"/> &nbsp;&nbsp;Value: <input type="text" class="test-param-value"/></div>
+                </td>
+                <td valign=top>                    
+                    <div id="addParam" class="test-icon ui-state-default ui-corner-all"><span class="ui-icon ui-icon-plusthick"></span></div>
+                    
+                    <div id="removeParam" class="test-icon ui-state-default ui-corner-all"><span class="ui-icon ui-icon-minusthick"></span></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Process Data:</strong>
+                </td>
+                <td colspan=2>
+                    <input style="margin-left: 0px;" type="checkbox" id="test-processData" checked="checked"/>
+                </td>
+            </tr>
+            <tr id="bodyRow" class="ui-state-disabled">
+                <td colspan=3><strong>Entity Body:</strong> <textarea id="test-entityBody" disabled="disabled" style="width: 100%; display: block; height: 100px;"></textarea></td>
+            </tr>
+            <tr>
+                <td style="padding-top: 5px; padding-bottom: 0px;" colspan=3 align=center><button id="test-submit">Send Request</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div style="width: 1000px; margin-bottom: 100px;" class="contentBox">
+    <div class="contentHeader ui-widget-header"><span>LORA Output</span></div>
+    <div class="contentBody ui-widget-content">
+        <pre id="test-output">No Output</pre>
+    </div>
+</div>
+
+<TMPL_INCLUDE NAME = "../../templates/footers/footer.tmpl">

@@ -1,0 +1,120 @@
+#!/usr/bin/perl
+# ===============================================================================
+#
+# Copyright (c) 2013, Lawrence Livermore National Security, LLC.
+# Produced at the Lawrence Livermore National Laboratory.
+# Written by Jeff Long <long6@llnl.gov>, et. al.
+# LLNL-CODE-640252
+#
+# This file is part of Lorenz.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License (as published by the
+# Free Software Foundation) version 2, dated June 1991.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the IMPLIED WARRANTY OF
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# terms and conditions of the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software Foundation,
+# Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#
+# ===============================================================================
+
+
+#
+# Try out lora.cgi REST endpoints from the command line.
+#
+# Example invocation:   test-lora /hosts
+#
+# Full usage:   test-lora /REST/endpoint [request-method [query-string]]
+#
+#      If request-method is PUT or POST, will read input from stdin
+#
+
+
+use strict;
+use Time::HiRes;
+my $debug = 0;
+
+$ENV{GATEWAY_INTERFACE} = "CGI/1.1";
+
+if (not @ARGV) {
+		print "Usage: $0 rest-url [request-method [query-string]]\n";
+		exit 1;
+}
+
+if ($ARGV[0] eq "-d") {
+	shift;
+    $debug=1;
+}
+
+
+# Check for valid Kerberos credentials -- need them to do almost anything
+my $validCreds = `klist -s \&\& echo 'yes'`;  chomp $validCreds;
+
+if ($validCreds ne "yes") {
+	die("Missing valid kerberos credentials. Please run 'kinit' and try again.\n");
+}
+
+$ENV{REQUEST_URI} = "/lorenz/lora/lora.cgi$ARGV[0]";
+
+if ($ARGV[1]) {
+    $ENV{REQUEST_METHOD} = uc($ARGV[1]);
+} else {
+    $ENV{REQUEST_METHOD} = "GET";
+}
+
+$ENV{QUERY_STRING} = "pretty=1";
+
+if ($ARGV[2]) {
+    $ENV{QUERY_STRING} .= "&$ARGV[2]";
+    $ENV{REQUEST_URI} = "$ENV{REQUEST_URI}?$ARGV[2]";
+} else {
+    $ENV{QUERY_STRING} .= "";
+}
+
+my $tmpfile = "";
+
+if ($ENV{REQUEST_METHOD} eq "POST" or $ENV{REQUEST_METHOD} eq "PUT") {
+	$tmpfile = "/tmp/test-lora.$$";
+	print "Reading stdin to get put/post body...\n";
+	my $body = "";
+	while (<STDIN>) {
+		$body .= $_ . '&';
+	}
+	$body =~ s/&$//;
+	$ENV{CONTENT_LENGTH} = length($body);
+	open (TMP, ">$tmpfile") or die ("Could not open temp file: $tmpfile\n");
+	print TMP $body;
+	close TMP;
+}
+
+my $start_time = [Time::HiRes::gettimeofday()];
+
+
+if ($debug) {
+	print "Running in perl debugger...\n";
+	print "setenv REQUEST_URI $ENV{REQUEST_URI}\n";
+	print "setenv REQUEST_METHOD $ENV{REQUEST_METHOD}\n";
+ 	print "setenv QUERY_STRING $ENV{QUERY_STRING}\n";
+	if ($tmpfile) {
+		system("perl -d ./lora.cgi < $tmpfile");
+	} else {
+		system("perl -d ./lora.cgi");
+	}
+} else {
+	if ($tmpfile) {
+		system("perl ./lora.cgi < $tmpfile");
+	} else {
+		system("perl ./lora.cgi");
+	}
+}
+my $diff = Time::HiRes::tv_interval($start_time);
+unlink $tmpfile if ($tmpfile and -e $tmpfile);
+
+print "Elapsed time: $diff\n";
+exit 0;
+

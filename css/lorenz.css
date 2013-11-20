@@ -1,0 +1,297 @@
+body { font-size:62.5%; font-family:  "century gothic", "arial", "serif" !important; } /*Allows us to say 1.2em for 12px, 1.0em for 10px, and so on...*/
+
+#lorenzMainLogo{
+	font-size: 8.0em;
+	font-weight: normal !important;
+	letter-spacing: 3px;
+}
+
+#header {
+	background-image: none !important;
+	border: none !important;
+}
+
+#lorenzBlurb{
+	font-style: italic;
+}
+
+.blurbText{
+	font-weight: normal !important;
+	font-size: 1.6em;
+}
+
+#lorenz-networkChange{
+    display: none;
+}
+
+#lorenz-networkChange .ui-button-text-only .ui-button-text{
+	padding: 0.4em 1em;
+}
+
+#navMenu .ui-state-default {
+	cursor: pointer;
+}		
+
+/*nav bar*/
+#navMenu {
+	padding: 0;
+	font-size: 1.5em;
+	border-left: none !important;
+	border-right: none !important;
+}
+
+#navMenu li{
+	float: left;
+	margin: 1px;
+	padding: 0;
+	border: none !important;
+	list-style: none;
+	text-decoration: none;
+}
+#navMenu li a {
+	padding: 15px;
+	border-width: 0;
+	text-decoration: none;
+	display: block;
+	font-weight: normal;
+}
+
+.headerLink{
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.headerLink:hover{
+    color: #888888;
+}
+
+.navText{
+    font-size: 1.2em; /*12px if browsers @ 16px*/
+    color: white;
+}
+
+.error{
+    font-size: 1.0em;
+    color: red;
+    font-weight: bold;
+}
+
+.wrapper {    
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -51px; /* the bottom margin is the negative value of the footer's height */
+    overflow: auto;
+	min-width: 1024px;
+}
+
+.footer, .push {   
+    height: 51px; /* .push must be the same height as .footer */
+    font-size: 1.2em;    
+    text-align: center;
+}
+
+html, body {
+    height: 100%;
+}
+
+.footer ul{
+    list-style-type: none;
+    color: black;
+}
+
+.footer a{
+    color: black;
+    text-decoration: underline;    
+}
+
+.footer a:hover{
+    color: #888888;
+}
+
+.footer a:visited{
+    color: black;
+    text-decoration: underline;  
+}
+
+.footer ul li{
+    display: inline;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+#loginInfo{
+    font-size: 1.2em;
+    float: right;
+}
+
+#loginInfo td{        
+    padding: 3px;
+}
+.contentBox{
+    font-size: 1.2em;
+    margin: 10px;
+	position: relative;
+}
+
+.contentBox .contentHeader{	
+	height: 35px;
+	line-height: 35px;
+}
+
+.contentBox .contentHeader span{
+	font-size: 1.3em;
+    vertical-align: middle;
+	font-weight: normal;
+    margin-left: 10px;
+}
+
+.contentBox .contentBody{
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.whiteLink{    
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.linkDiv{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.linkDiv:hover{
+    color: #888888;
+}
+
+.ajaxLoader {
+	background-image: url('../images/ajax-loader.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 31px;
+	width: 31px;
+	display: block;
+}
+
+.floatRight{
+	float:right;
+}
+
+.floatLeft{
+	float: left;
+}
+
+.centerMargins{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.dataTables_wrapper tbody tr, .dataTables_wrapper tbody tr td{
+	border-left: 0px solid #000000;
+	border-right: 0px solid #000000;
+	/*font-weight: normal !important;*/
+}
+
+.row_selected{
+	font-weight: bold;	
+}
+
+.ui-widget { font-family: inherit; font-size: 1.2em; }
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: inherit; font-size: 1em; }
+
+.feedbackError{
+	color: red;
+	font-size: 11px;
+}
+
+.feedbackSuccess{
+	color: green;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.inlineBlock{
+	display: inline-block;
+}
+
+.lorenzAlertHeaderText{
+	font-size: 14px;
+	font-weight: bold;
+	vertical-align: bottom;
+}
+
+#alertSeparator{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+#lorenzSpecialAlert{
+	overflow: auto;
+	font-size: 12px;
+	font-weight: normal;
+	height: 56px;
+	padding: 5px;
+	margin-right: 6px;
+}
+
+#staticUserWrapper button{
+	font-size: 12px;
+}
+
+#unstableError{
+	font-size: 14px;
+    margin-left: 11px;
+    margin-right: 22px;
+    margin-top: 10px;
+    padding: 10px;
+    position: relative;
+	display: none;
+}
+
+.dismissLink{
+	font-size: 12px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 5px 10px 0px 0px;
+}
+
+.visByDiv{
+	margin: 10px;
+	font-size: 12px;
+}
+
+.footer #leftLogo{
+    display: table-cell;
+    /*Set this to your logo!*/
+    /*background-image: url('../images/llnl_small.gif');*/
+    height: 51px;
+    width: 50px;
+}
+
+.footer #inner{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.footer #rightLogo{
+    display: table-cell;
+    /*Set this to your logo!*/
+    /*background-image: url('../images/lc_logo.gif');*/
+    height: 51px;
+    width: 51px;
+}
+
+.footer{
+    display: table;
+    width: 100%;
+}
+
+.unbold{
+	font-weight: normal;
+}

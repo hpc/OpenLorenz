@@ -1,0 +1,637 @@
+.portlet-contentBox .portletLoading {
+    background-image: url('../images/ajax-loader.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 31px;
+	background-color: white;
+}
+
+.portlet-contentBox table td, .portlet-table td{
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+
+.portlet-contentBox .dialogLink{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.portlet-contentBox{
+    font-size: 1.2em;
+    margin: 0px 0px 10px 10px;
+	position: relative;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #999;
+}
+
+.portlet-contentBox .portlet-contentHeader{
+	cursor: move;
+	height: 35px;
+	line-height: 35px;
+}
+
+.portlet-contentBox .portlet-contentHeader .portlet-headerTitle{
+    font-size: 1.3em;
+    vertical-align: middle;
+	font-weight: normal;
+    margin-left: 10px;
+}
+
+.portlet-contentBox .portlet-contentBody{    
+    padding: 0px;    
+	border-top: 0px;
+    font-size: 1.2em;
+}
+
+.portlet-contentBox .linkDiv{    
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.portlet-contentBox .linkDiv:hover{
+    color: #888888;
+}
+
+.portlet-contentBox .linkDiv:visited{
+    color: #735F25;
+}
+
+.portlet-contentBox .ui-button{
+    font-size: 12px;
+}
+
+.portlet-contentBox .portlet-iconWrapper{
+	position: absolute;              
+	margin: 0;
+	padding-bottom: 2px;
+	cursor: pointer;
+	width: 18px;
+}
+
+.portlet-contentBox .ui-progressbar{
+    height: 10px;
+}
+
+.portlet-contentBox .dataTables_filter input{
+    width: 60px;
+}
+
+.portlet-cursorPointer{
+	cursor: pointer;
+}
+
+/* [MODIFIES DATATABLE DEFAULT] Eliminate whitespace beneath tables when
+   there are less than 10 entries. */
+.portlet-contentBox .dataTables_wrapper{
+    min-height: 0px;
+}
+
+.portlet-contentBox .descText, .descText{
+    font-size: 1.0em;
+}
+
+.dialog-descText{
+	font-size: 10px;
+	margin-top: 15px;
+}
+
+.portlet-ui-icon{
+	cursor: pointer;
+	display: inline-block;
+}
+
+.portlet-floatRight{
+	float: right;
+}
+
+.portlet-floatLeft{
+	float: left;
+}
+
+.portlet-diskQuota-row{
+	line-height: 16px;
+}
+
+.portlet-header{
+	margin: 1px;
+	padding: 3px 10px;
+	cursor: pointer;
+	position: relative;
+}
+
+.portlet-expand{
+	padding: 5px 10px;
+}
+
+.portlet-expand pre{
+	font-family: inherit;
+	line-height: 16px;
+}
+
+.portlet-col-header{
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-left: 13px;
+	text-decoration: underline;
+}
+
+.portlet-newsWrapper{
+	max-height: 200px;
+	overflow: auto;
+}
+
+.portlet-licenseStatusWrapper{
+	max-height: 400px;
+	overflow: auto;
+}
+.portlet-newsList{
+	list-style: disc;
+	margin-left: 13px;
+	margin-top: 5px;
+}
+
+.portlet-newsListItem{
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.portlet-newsRead{
+	list-style-type: none;
+	font-weight: normal !important;
+}
+
+.portlet-newsArticle{
+    cursor: pointer;
+}
+
+.portlet-newsArticle:hover{
+    color: #888888;
+}
+
+.portlet-allClustersLink{
+	margin-right: 15px;
+	font-size: 11px;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.portlet-mineClustersLink{
+	font-size: 11px;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.portletVisibilityList li{
+	min-width: 180px;
+	display: inline-block;
+}
+
+.ui-dialog{
+	font-size: 12px;
+}
+
+.defaultLoadTitle{
+	height: 16px;
+	line-height: 16px;
+	margin-bottom: 5px;
+}
+
+.ui-accordion-header a{
+	font-size: 1.2em !important;
+}
+
+div #portlet-licenseStatusDetails p.ui-state-highlight{
+    width:100%;
+    padding:2px;
+}
+
+/* CSS specific to: lcAlerts, licenseStatus */
+
+div.portlet-titleRow{
+	margin-bottom: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.portlet-titleRow span{
+	display: inline-block;
+	font-weight: bold;
+	vertical-align: middle;
+	word-wrap: break-word;
+}
+
+.portlet-titleRow span.portlet-iconHover{
+	margin: 1px;
+}
+
+.portlet-titleRow span.portlet-iconHover:hover{
+	margin: 0px;
+	border: 1px solid black;
+	cursor: pointer;
+}
+
+.portlet-titleRow-leftCell{
+	width: 50%;
+}
+.portlet-titleRow-rightCell{
+	width: 50%;
+	text-align: right;
+}
+
+
+.portlet-titleRow-title{
+	margin-left: 5px;
+	font-weight: bold;
+	word-wrap: break-word;
+	width: 75%;
+	line-height: normal;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.portlet-bottomLegend{
+	background: transparent;
+	vertical-align: middle;
+	margin-bottom: 2px;
+}
+
+.portlet-bottomLegend span{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.portlet-titleRow-descWrap{
+	border: 0px solid #000000;
+}
+
+.portlet-titleRow-desc{
+	padding: 0px 0px 5px 27px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.portlet-titleRow-desc div{
+	font-size: 11px;
+	text-align: right;
+	margin-top: 10px;
+}
+
+.portlet-contentBody .lorenzTechLink{
+	position: relative;
+	margin-top: 15px;
+	bottom: 0;
+	margin-left: 0px;
+}
+
+.portlet-contentHeader div.portlet-headerErrorIcon{
+	display: inline-block;
+	margin-left: 10px;
+	vertical-align: middle;
+}
+
+.portlet-linksOrganizeIcon{
+	position: absolute;
+	margin-left: -1.3em;
+	margin-top:-2px;
+}
+
+.portlet-linkOrganizeContainer{
+	margin: 0 3px 3px 3px;
+	padding: 0.6em 0.4em 0.4em 1.5em;
+	height: 18px;
+}
+
+.portlet-organizeLinkUl{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.portlet-hostJobTable th, .portlet-hostJobTable td{
+	text-align: left;
+	padding-right: 10px;
+	padding-top: 2px;
+	word-wrap: break-word;
+}
+
+.portlet-statusLegend{
+	margin-top: 8px;
+}
+
+.portlet-statusLegendItem{
+	margin-top: 2px;
+}
+
+.portlet-buttonTable{
+	text-align: center;
+	border-collapse: separate;
+	border-spacing: 2px;
+}
+
+#accountsInfo{
+	overflow: auto;
+}
+
+.portlet-featureContainer{
+	display: none;
+	margin-bottom: 3px;
+	width: 100%;
+	margin-top: -3px;
+}
+
+.portlet-featureContainer li{
+	margin-left: 11px;
+	padding: 1px;
+}
+
+/* BEGIN SUBMENU STYLES */
+
+.submenuButton {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	border-top: none;
+	border-left: none; 
+	text-align: center;
+	padding: 3px 0px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.portletSubContent {
+	padding: 10px;
+}
+
+/* END SUBMENU STYLES */
+
+.portlet-center{
+	text-align: center;
+}
+
+.portlet-bold{
+	font-weight: bold;
+}
+
+.portlet-clickableTable tbody{
+	cursor: pointer;
+}
+
+.portlet-buttonSet{
+	margin-top: 10px;
+	display: inline-block;
+	font-size: 12px;
+	width: 100%;
+}
+
+.portlet-canceledJobRow td{
+	background-color: red !important;
+}
+
+ul#portletDefaultLinks li, ul#portletUserLinks li, ul#enclaveLinks li{
+	margin-top: 4px;
+}
+
+.dialog-smallNote{
+	font-size: 0.8em;
+}
+
+table.portlet-allDetails td{
+	padding-right: 10px;
+	padding-bottom: 5px;
+}
+
+.ui-autocomplete {
+		max-height: 300px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		/* add padding to account for vertical scrollbar */
+		padding-right: 12px;
+	}
+	
+.portlet-giveTakeTable {
+	/*margin-bottom: 5px;*/
+}
+
+.portlet-giveTakeTable td{
+	padding-bottom: 5px;
+	padding-right: 5px;
+}
+
+.portlet-giveTakeErrorDiv{
+	margin-bottom: 5px;
+	display: none;
+	padding: 5px;
+}
+
+.portlet-giveTakeErrorInfo{
+	margin-bottom: 5px;
+	display: none;
+	padding: 5px;
+}
+
+.portlet-staffAway-personRow{
+	margin: 5px; font-weight: bold; padding: 5px; display: block; position: relative; cursor: pointer;
+}
+
+.portlet-staffAway-personRow .ui-icon{
+	position: absolute; top: 3px; right: 5px; display: inline;
+}
+
+.portlet-staffAway-detailTable{
+	margin-left: 10px;
+	display: none;
+}
+
+.portlet-ui-table th{
+	padding: 5px !important;
+}
+
+.portlet-ui-table td{
+	padding: 5px !important;
+	border: 1px hidden;
+}
+
+.portlet-ui-table tr.host-clickable{
+	cursor: pointer;
+}
+
+.portlet-ui-table tr.host-hidden{
+	display: none;
+}
+
+.portlet-ui-table tr.process-hidden{
+	display: none;
+}
+
+.portlet-scroll-table-container{
+	height: 235px;
+	position: relative;
+	padding-top: 28px;
+}
+
+.portlet-scroll-table-header-bg{
+	position: absolute;
+	height: 28px;
+	top: 0;
+	right: 0;
+	left: 0;
+}
+
+.portlet-scroll-table-inner{
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.portlet-scroll-table-th-inner{
+	position: absolute;
+	top: 0px;
+	line-height: 20px;
+	padding: 5px;
+}
+
+.portlet-scroll-table td{
+	padding: 5px !important; 
+	border: 1px solid transparent;
+}
+
+.portlet-machineStatusTable .machineNameRow{
+	padding-left: 5px;
+}
+
+.portlet-machineStatusTable td{
+	border: 1px hidden;
+	padding-bottom: 1px !important;
+	padding-top: 1px !important;
+}
+
+.DTTT_container{
+	margin-bottom: 10px;
+}
+
+.ColVis{
+	float: none !important;
+	margin-bottom: 0 !important;
+}
+
+.DTTT_button{
+	height: 28px !important;
+	font-family: "century gothic", "arial", "serif";
+}
+
+.ColVis_Button {
+	font-family: "century gothic", "arial", "serif";
+    cursor: pointer;
+    height: 28px;
+    margin-right: 3px;
+    padding: 3px 10px;
+    position: relative;
+}
+
+.ColVis_collection, .ColVis_collection  .ColVis_Button{
+	width: 121px !important;
+}
+
+div.DTTT_collection_background, div.ColVis_collectionBackground{
+	opacity: 0 !important;
+}
+
+.portlet-dataTimestamp{
+	text-align: right;
+	padding: 0px 10px 10px 10px;
+}
+
+.icon-table td{
+	padding-bottom: 2px !important;
+	padding-top: 2px !important;
+}
+
+.portlet-legendItem{
+	padding-right: 13px;
+	height: 16px;	
+	line-height: 16px;
+	display: inline-block;
+}
+
+.portlet-emptyDiv{
+	position: absolute; top: 50%; left: 50%; margin-left: -30px; margin-top: -6px;
+}
+
+.portlet-processViewerTable td {
+	margin-bottom: 5px !important;
+}
+
+.overflow-auto{
+	overflow: auto;
+}
+
+.portlet-confluence-container{
+	max-height: 250px;
+}
+
+.portlet-confluence-title{
+	font-weight: bold;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+.space-ul {
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.space-ul li{
+    margin-bottom: 5px;
+}
+
+.space-detail-table td{
+    padding-bottom: 5px;
+}
+
+.search-results-container{
+    min-height: 78px;
+    max-height: 250px;
+    position: relative;
+}
+
+.confluence-search-results{
+    margin-top: 15px;
+}
+
+.search-result-item{
+    margin-bottom: 10px;
+}
+
+.search-result-subitem{
+    margin-top: 3px;
+}
+
+.confluence-user-thumbnail{
+    height: 32px;
+    width: 32px;
+    margin-right: 5px;
+}
+
+#confluence-search-term{
+    width: 160px;
+}
+
+.portlet-confluence-spacelist td{
+    padding-bottom: 7px !important;
+}
+
+.confluence-space-options{
+    margin-top: 3px;
+}
+
+.confluence-space-title{
+    font-style: italic;
+    font-weight: bold;
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title><TMPL_VAR NAME = "title"></title>
+    <link rel="icon" type="image/png" href="<TMPL_VAR NAME = "webRoot">/images/favicon.png" />
+        
+	<link id="jqueryUiCss" rel="StyleSheet" type="text/css" media="screen" href="<TMPL_VAR NAME="currentThemePath">" />	
+	
+    <TMPL_IF NAME="includeBootstrap">
+        <link rel="StyleSheet" type="text/css" media="<TMPL_VAR NAME="media" DEFAULT=screen>" href="<TMPL_VAR NAME = "webRoot">/js/thirdParty/bootstrap/css/bootstrap.css" />
+    </TMPL_IF>
+    
+	<TMPL_IF NAME = "isProduction">
+		<link rel="StyleSheet" type="text/css" media="<TMPL_VAR NAME="media" DEFAULT=screen>" href="<TMPL_VAR NAME = "compiledCss">" />
+	<TMPL_ELSE>
+	    <TMPL_LOOP NAME = "css">
+			<link <TMPL_IF NAME = "hasId">id="<TMPL_VAR NAME="id">"</TMPL_IF>rel="StyleSheet" type="text/css" media="<TMPL_VAR NAME="media" DEFAULT=screen>" href="<TMPL_VAR NAME = "cssFile">" />
+		</TMPL_LOOP>
+	</TMPL_IF>
+	
+    <!--Slight datatables CSS tweak here to remove any extra padding on tables without data-->
+    <style>.dataTables_wrapper{min-height: 0px;}</style>
+
+	<TMPL_IF NAME = "postCSSContent">
+		<style><TMPL_VAR NAME="postCSSContent"></style>
+	</TMPL_IF>
+</head>
+<body>
+<input type="hidden" name="currentTheme" value="<TMPL_VAR NAME="currentTheme">" />
+<TMPL_IF NAME = "isTest">
+    <h1 id="qunit-header">QUnit Test Suite</h1>  
+    <h2 id="qunit-banner"></h2>  
+    <div id="qunit-testrunner-toolbar"></div>  
+    <h2 id="qunit-userAgent"></h2>  
+    <ol id="qunit-tests"></ol>
+    <br/><br/>
+</TMPL_IF>
+
+<div class="wrapper"> 
+	<div id="header" class="ui-widget-header">
+		<input type="hidden" name="levelsFromLorenzRoot" value="<TMPL_VAR NAME = "levelsFromRoot">"/>
+		<input type="hidden" name="lorenz-lcZone" value="<TMPL_VAR NAME = "lcZone">"/>
+		<input type="hidden" name="lorenz-lcNetwork" value="<TMPL_VAR NAME = "lcNetwork">"/>
+        <input type="hidden" name="lorenz-mobileOptOut" value="<TMPL_VAR NAME = "mobileOptOut">"/>
+		
+		<table width="100%">
+			<tr>
+				<td width="492">
+					<table width="100%">
+						<tr>
+							<td rowspan=2 width=237>
+								<span id="lorenzMainLogo"><tmpl_var name="lorenzBrand"></span>
+							</td>
+						</tr>
+						<tr>
+							<td style="line-height: 29px;vertical-align: bottom;">
+								<span id="lorenzBlurb" class="blurbText"><tmpl_var name="lorenzBlurb"></span>
+							</td>
+						</tr>
+					</table>
+				</td>				
+				<td width="245">
+					<div id = "loginInfo">
+						<table>
+							<tr><td width=105 class="bold">Logged in: </td><td id = "userId"><TMPL_VAR NAME = "user"></td></tr>
+							<tr><td class="bold">Date: </td><td><span id = "currDate"></span></td></tr>              
+							<tr><td class="bold">Temperature: </td><td><span id = "deg"><TMPL_VAR NAME="temperature" DEFAULT='n/a'></span></td></tr>
+							<tr><td class="bold">Theme: </td><td id="themeContainer"></td></tr> 
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<ul id="navMenu" class="ui-helper-reset ui-helper-clearfix ui-widget-header">
+		<li class="ui-state-default"><a href = "<TMPL_VAR NAME = "webRoot">/mylc/mylc.cgi">dashboard</a></li>
+		
+		<li class="ui-state-default"><a href = "<TMPL_VAR NAME = "webRoot">/jobManagement/jobManagement.cgi">job management</a></li>
+		
+		<li class="ui-state-default" id="giveFeedbackLink"><a href = "javascript:void(0)">contact us</a></li>
+	</ul>

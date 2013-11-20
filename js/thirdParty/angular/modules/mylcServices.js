@@ -1,0 +1,1 @@
+var MyLCServices = angular.module('mylc.services', []);

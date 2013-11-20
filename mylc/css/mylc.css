@@ -1,0 +1,74 @@
+.column{
+    /*width: 337px;*/
+    width: 33%;
+    float: left;
+    padding-bottom: 100px;
+}
+
+.contentHeader{
+    cursor: move;
+}
+
+#portletContainer{
+    overflow: auto;
+}
+
+#portletControls{
+    padding: 10px 11px 10px 10px;
+    position: relative;
+}
+
+/*ROUNDED CORNERS BAD DIE DIE DIE*/
+#portletControls * {
+    border-radius: 0px !important;
+}
+
+#controls-staff{
+	margin-top: 10px;
+}
+
+#clearServerCache{
+	position: absolute;
+	bottom: 15px;
+	right: 185px;
+}
+
+#autoRefreshToggle{
+	position: absolute;
+	bottom: 13px;
+	right: 305px;
+}
+
+#resetArrangement{
+	position: absolute;
+	bottom: 15px;
+	right: 24px;
+}
+
+.ui-dialog, .ui-dialog-titlebar{
+    border-radius: 0px !important;
+}
+
+.ui-sortable-placeholder {
+    border: 1px dotted black;
+    visibility: visible !important;
+    height: 150px !important;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.ui-sortable-placeholder * {
+    visibility: hidden;
+}
+
+.ui-sortable-placeholder-custom {
+    background: black;
+    border: 1px dotted white;
+    visibility: visible !important;
+    height: 25px !important;
+    width: 316px;
+}
+
+.ui-sortable-placeholder-custom * {
+    visibility: hidden;
+}

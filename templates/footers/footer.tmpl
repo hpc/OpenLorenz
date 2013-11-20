@@ -1,0 +1,27 @@
+</div> <!-- closes "wrapper" div from header -->
+
+<div class="footer">
+    <!-- SET THE URLS FOR LEFTLOGO IN LORENZ.CSS -->
+    <div id = "leftLogo"></div>
+    
+    <div id = "inner">
+      <!-- PUT YOUR FOOTER STUFF HERE, LEGAL INFO, LINKS ETC... -->
+    </div>
+    
+    <!-- SET THE URLS FOR RIGHTLOGO IN LORENZ.CSS -->
+    <div id = "rightLogo"></div>
+</div>
+
+<TMPL_VAR NAME = "preJSContent">
+
+<TMPL_IF NAME = "isProduction">
+    <script type="text/javascript" src="<TMPL_VAR NAME = "compiledJs">"> </script>
+<TMPL_ELSE>
+    <TMPL_LOOP NAME = "js">
+        <script type="text/javascript" src="<TMPL_VAR NAME = "jsFile">"> </script>
+    </TMPL_LOOP>
+</TMPL_IF>
+    
+<TMPL_VAR NAME = "postJSContent">
+</body>
+</html>

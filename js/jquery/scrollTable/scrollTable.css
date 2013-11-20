@@ -1,0 +1,7 @@
+.scrolltable td, .scrolltable th{
+    padding: 5px;
+}
+
+.scrolltable-container{
+    position: relative;
+}

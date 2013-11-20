@@ -1,0 +1,470 @@
+<script id="tmpl-contentBox" type="x-jquery-tmpl">
+	<div class = "contentBox interfacePane" id="${id}">
+		<div class = "contentHeader ui-widget-header"><span class = "headerTitle">${title}</span></div>
+		<div class = "contentBody ui-widget-content">{{html $item.html()}}</div>
+	</div>
+</script>
+
+<script id="tmpl-mainToolbar" type="x-jquery-tmpl">
+	<span id="jobManagementToolbar" class="ui-widget-header ui-corner-all">
+		Job Submission: 
+		<span id = "createLoad">
+			<button id="createNewJob" class="ui-button ui-corner-left ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false">
+				<span class="ui-button-text">Create New Job</span>
+			</button>			
+			
+			<button id="quickSubmit" class="ui-button ui-corner-right ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false" style="margin-left: -4px">
+				<span class="ui-button-text">Quick Submit Job</span>
+			</button>
+		</span>
+		
+		<span style="margin-left: 30px;">Job Monitoring: </span>
+		<span id="jobDetails">
+			<button id="activeJobs" class="ui-button ui-corner-left ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false">
+				<span class="ui-button-text">Active Jobs{{if loraUser !== 'ME'}}*{{/if}}</span>
+			</button>
+			
+			<button id="completedJobs" class="ui-button ui-corner-right ui-widget ui-state-default ui-button-text-only" role="button" aria-disabled="false" style="margin-left: -4px">
+				<span class="ui-button-text">Completed Jobs{{if loraUser !== 'ME'}}*{{/if}}</span>
+			</button>
+		</span>
+	</span>
+</script>
+
+<script id="tmpl-activeJobs" type="x-jquery-tmpl">
+	{{wrap "contentBox"}}
+		{{tmpl "#tmpl-jobTable"}}	
+	{{/wrap}}
+</script>
+
+<script id="tmpl-jobTable" type="x-jquery-tmpl">
+	<div id = "jobTableWrapper">
+		Below you will find a list of currently active jobs (running, pending, or held) in the queue.  By clicking on a row in the table
+		you can view the details for each individual job.  There is a slight delay in populating this table.  If you don't see a recently
+		submitted job, click the "Refresh Table" button until it appears.
+		<br/>
+		<hr width = 100%/>
+		
+		<table style="margin-bottom: 4px; width: 100%;" class="jobTable-toolbar">
+			<tr style="line-height: 16px">
+				<td width=76>
+					<a id="masterCheckbox-button" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left ui-button-icon" role="button" aria-disabled="true">
+						<span class="ui-button-text"> <input type="checkbox" id="masterCheckbox"> </span>
+					</a>
+					<a id="masterCheckbox-menu"> &nbsp; </a>
+					<ul id="masterCheckbox-popup" class="popup-menu">
+						<li><a>All</a></li>
+						<li><a>None</a></li>
+						<li><a>Pending</a></li>
+						<li><a>Running</a></li>
+						<li>
+							<a>Host</a>
+							<ul>
+								{{each hosts}}
+								<li><a>${$value}</a></li>
+								{{/each}}
+							</ul>
+						</li>
+					</ul>
+				</td>
+			<td width=152><a id="cancelAllSelected">Cancel</a><a id="holdAllSelected">Hold</a></td>
+			<td width=125 class="tableTools-container"></td>
+			<td width=147 class="colVis-container"></td>
+			<td>
+				<a id="refreshJobData">Refresh Table</a>
+				<span id = "refreshJobNotice" style="display:">
+					(Available in: <span id="refreshCount">10</span>)
+				</span>
+				<span id = "staleDataNotice" style="display:none">
+					** Your job data is out of date. Click "Refresh Table" to update. **
+				</span>
+			</td>
+            </tr>
+		</table>
+		
+		<table id = "jobTable" class = "display" width = "100%">
+			<thead>
+				<tr>
+					{{each headers}}
+					<th>${$value}</th>
+					{{/each}}							
+				</tr>
+			</thead>
+			<tbody>
+				{{each rows}}
+				<tr>
+					<td>${$value.checkbox}</td>
+					<td>${$value.JobId}</td>
+					<td>${$value.Name}</td>
+					<td>${$value.MetaJobState}</td>
+					<td>${$value.Host}</td>
+					<td>${$value.StartTime}</td>
+					<td>${$value.EndTime}</td>
+					<td>${$value.Partition}</td>
+					<td>${$value.Reason}</td>
+					<td>${$value.TimeLimit}</td>
+					<td>${$value.Dependency}</td>
+					<td>${$value.JobScheduler}</td>
+					<td>${$value.JobSubmitter}</td>
+					<td>${$value.NumNodes}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</script>
+
+<script id="tmpl-jobDetails" type="x-jquery-tmpl">
+	<div id = "jobDetailsWrapper">
+		<h2>Job Details (${jobName})</h2><hr width = 100% />
+		<div id = "detailsPane">
+			<span id = "activeJobButtons" class = "ui-widget-header ui-corner-all">
+				Job Operations:
+				{{each opButtons}}
+					<button id="${$value.id}">${$value.text}</button>
+					{{if subMenu}}
+						<ul id = "${menuId}" class="popup-menu">
+							{{each subMenu}}
+							<li><a>${$value}</a></li>
+							{{/each}}				
+						</ul>
+					{{/if}}
+				{{/each}}			
+			</span>
+			
+			{{tmpl "#tmpl-jobFields"}}				
+		</div>
+	</div>
+</script>
+
+<script id="tmpl-jobFields" type="x-jquery-tmpl">
+	<div id = "jobFields">
+		<table width = 100% id = "jobDetailsTable">
+			{{each commonDetails}}
+			<tr>			
+				{{each $value.cols}}
+				<td width=50%><strong>${$value.name}:</strong> <span id = "detailValue-${$value.name}">${$value.value}</span></td>				
+				{{/each}}
+			</tr>
+			{{/each}}
+		</table>
+		{{if additionalDetails}}
+		<span id = "moreDetails" class = "linkDiv">More Details</span><span id = "moreDetailTriangle" class = "inlineBlock ui-icon ui-icon-triangle-1-e"></span>
+		<div id = "additionalDetails">
+			<table width = 100% id = "additionalDetailsTable">
+			{{each additionalDetails}}
+			<tr>			
+				{{each $value.cols}}
+					{{if $value.name}}<td width=50%><strong>${$value.name}:</strong> ${$value.value}</td>{{/if}}
+				{{/each}}
+			</tr>
+			{{/each}}
+		</table>
+		</div>
+		{{/if}}
+	</div>
+</script>
+
+<script id="tmpl-saveConfigurationDialog" type="x-jquery-tmpl">
+	<div>
+		Enter a name and click save.  Only (a-z, A-Z, 0-9, _, -) characters are excepted. The maximum name size is 24 characters.<hr width=100%/>
+		Name: <input id="saveConfName" size="38" />
+	</div>
+</script>
+
+<script id="tmpl-loadExistingDialog" type="x-jquery-tmpl">
+	<div id ="loadExistingDialog">
+		Either enter a path or use the directory traversal interface to find your script and click load.<hr width=100%/>
+		
+		Script: <input id="loadExistingPath" name="loadExistingPath" size="70" /><br/><br/>
+		Host:
+		<select id="existingHost">	
+			{{each existingHosts}}
+				<option value="${$value}">${$value}</option>
+			{{/each}}
+		</select>
+	
+		<div id = "loadExistingFileTree"></div>
+	</div>
+</script>
+
+<script id="tmpl-launchDirBrowser" type="x-jquery-tmpl">
+	<div id ="launchDirBrowser">
+		Double click a directory to set the launch directory. Or click "select" after clicking a directory<hr width=100%/>
+		Directory: <input id="launchDirBrowseInput" name="launchDirBrowseInput" size="70" /><br/><br/>
+		<div id = "launchDirBrowserFileTree"></div>
+	</div>
+</script>
+
+<script id="tmpl-createNewJob" type="x-jquery-tmpl">
+	{{wrap "contentBox"}}		
+		<span id="createNewJobOptions" class="ui-widget-header ui-corner-all">
+			Start Here:
+			{{each createNewButtons}}
+			<button id="${$value.id}">${$value.text}</button>
+			{{/each}}
+			&nbsp;&nbsp;
+			Configuration Options:
+			{{each configurationButtons}}
+				<button id="${$value.id}">${$value.text}</button>
+				{{if configurations}}
+					<ul id = "${menuId}" class="popup-menu">
+						{{each configurations}}
+						<li><a>${$value}</a></li>
+						{{/each}}				
+					</ul>
+				{{/if}}
+			{{/each}}			
+		</span>
+		
+        <span id="jobOptionsFeedback" class="ui-state-highlight">
+            
+        </span>
+        
+		<div style="font-size: 12px;margin-bottom: 5px;">
+			Begin by selecting a cluster.  You can reset the form by clicking "new job".
+			At any time you can save your job configuration
+			form by clicking "Save Configuration" and typing a name in the input box that appears.
+		</div>
+		
+		<hr width="100%"/>
+		<div id="newJobForm">
+			<table width="100%" id = "newJobTable">
+				<tr>
+					<td width=500>* Cluster Name: <select id ="job_cluster" class = "required">{{each clusters}}<option value = "${$value}">${$value}</option>{{/each}}</select> <span id = "clusterDetailLink" class = "display-none linkDiv inputDescText">Cluster Info</span></td>					
+					<td>* Partition: <select class = "required" id="job_partition"><option></option></select></td>
+					
+				</tr>
+				<tr>
+					<td>* Bank: <select class = "required" id="job_bank"><option></option></select></td>
+					<td>* QOS: <select class = "required" id="job_qos"><option></option></select></td>
+				</tr>
+				<tr>
+					<td>* Number of Nodes: <input class = "required" id="job_nNodes" type = "text" size = "3" value="1"/> <span class = "inputDescText">(Total Nodes: <span id="totalNodes">n/a</span>, Max Nodes: <span id="maxNodes">n/a</span>)</span></td>
+					<td>* Launch Directory: <input class = "required" id="job_launchDirectory" type = "text" size = "24" /> &nbsp;<a href="#" id="browseLaunchDir">browse</a></td>
+				</tr>					
+				<tr>
+					<td>* Number of Tasks: <input id="job_nTasks" class = "required" type = "text" size = "3" value="1"/> <span class="inputDescText">(Max Tasks: <span id="maxTasks">n/a</span>)</span></td>				
+					<td>Job Name: <input id="job_name" type = "text" size = "24" /></td>
+				</tr>
+				<tr>
+					<td>Wall Clock Time Limit: <input type = "text" id="job_days" size = "3" /> day(s) <input type = "text" id="job_hours" size = "3" /> hour(s) <input type = "text" id="job_minutes" size = "3" /> minute(s)<br/><span class="inputDescText">(Max Time [dd-hh:mm:ss]: <span id = "wclMaxTime">n/a</span>)</span></td>
+					<td id="depContainer">{{tmpl "#tmpl-dependencyList"}}</td>
+				</tr>
+				<tr colspan=2>					
+					<td>E-mail Notification: <input id="job_emailNotification" type="checkbox"/></td>
+					<td>Dependency Type: <select id="job_depType">{{each depTypes}}<option value="${$value}">${$value}</option>{{/each}}</select> <span class = "inputDescText">(requires dependency)</span></td>							
+				</tr>
+				<tr>
+					<td colspan=2>
+						<span id = "advancedOptionsLink" class = "linkDiv">Advanced Options</span><span id = "advancedOptionsTriangle" class = "inlineBlock ui-icon ui-icon-triangle-1-e"></span>
+						<table id='advancedOptions' style="display:none;" width=100%>
+							<tr>
+								<td width='500'><div class="tableCell-middle">Generic Resources (gres):&nbsp;</div><div class="tableCell-middle"><select id="job_gres" size=5 multiple><option></option></select></div><div class="inputDescText">(your job will require these resources)</div></td>
+								<td>Output File Path: <input id="job_outputPath" type="text" size="24" /> <div class="inputDescText">(defaults to job launch directory with file name slurm-{jobid}.out)</div></td>
+							</tr>
+							<tr>
+								<td>Reservation: <input id="job_reservation" type="text" size="24" /></td>
+								<td>Error File Path: <input id="job_errorPath" type="text" size="24" /></td>
+							</tr>
+							<tr>
+								<td>Begin Time: <input id="job_beginTime" type="text" size="24" /></td>
+								<td>Merge STDOUT & STDERR: <input id="job_joinOutErr" type="checkbox" /></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=2>
+						* Script Body:<br/> <textarea class = "required" id = 'jobscript' rows="20" cols="122"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=2 align=center><button id = "submitScript">Submit Script</button></td>
+				</tr>
+				<tr>
+					<td colspan=2 >* = required</td>
+				</tr>
+			</table>
+		</div>
+	{{/wrap}}
+</script>
+
+<script id="tmpl-editJobParamsDialog" type="x-jquery-tmpl">
+	<div>
+		Change the fields below you wish to edit.  Then click "Save" to enact the changes.<hr width=100%/>
+		<div id="editJobForm">
+			<table width=100%>
+				<tr>
+					<td>Partition: <select id="job_partition"><option></option></select></td>
+					<td>Bank: <select id="job_bank"><option></option></select></td>
+				</tr>
+				<tr>
+					<td>QOS: <select id="job_qos"><option></option></select></td>
+					<td id="depContainer">{{tmpl "#tmpl-dependencyList"}}</td>
+				</tr>
+				<tr>
+					<td>Nodes: <input id="job_nNodes" type = "text" size = "3" value="1"/><br/><span class = "inputDescText">(Total Nodes: <span id="totalNodes">n/a</span>, Max Nodes: <span id="maxNodes">n/a</span>)</span></td>
+					<td>WCL: <input type = "text" id="job_days" size = "3" /> day(s) <input type = "text" id="job_hours" size = "3" /> hour(s) <input type = "text" id="job_minutes" size = "3" /> minute(s)<br/><span class="inputDescText">(Max Time: <span id = "wclMaxTime">n/a</span>)</span></td>
+				</tr>
+				<tr>
+					<td>Job Name:  <input id="job_name" type = "text" size = "24" /></td>
+					<td>Reservation: <input id="job_reservation" type="text" size="24" /></td>
+				</tr>
+				<tr>
+					<td><div class="tableCell-middle">GRES:&nbsp;</div><div class="tableCell-middle"><select id="job_gres" size=5 multiple><option></option></select></div></td>
+					<td>&nbsp;</td>
+				</tr>		
+			</table>
+		</div>	
+	</div>
+</script>
+
+<script id="tmpl-examineDialog" type="x-jquery-tmpl">
+	<div id="examineDialog">
+		<div id="examineDialogTabs">
+			<ul>
+				<li><a href="#examineWorkingDir">Examine Launch Directory</a></li>
+				{{if running}}
+					<li><a href="#examineStatJob">STAT Job</a></li>
+				{{/if}}
+			</ul>
+			<div id="examineWorkingDir">
+				By default the current job's working directory is shown below.  Additionally, if you examine an running job you can plot statistics.<hr width=100%/>
+		
+				<div id ="examineFileTree"></div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script id="tmpl-statDialog" type="x-jquery-tmpl">
+<div id="statDialog">
+	Select a job step and click "Get STAT" to generate a new stack trace image.
+	A preview of that image will appear below.<hr width="100%"/>
+	
+	<b>Job Steps:</b>
+	<select id="examineStatJobStepIds">
+		{{each jobStepIds}}
+		<option value="${$value}">${$value}</option>
+		{{/each}}
+	</select>
+	
+	<button id="getJobStat">Generate STAT Image</button>
+	
+	<br/><br/><br/>
+	
+	Below is a list of all available Lorenz generated STAT images.  You can preview
+	the image or download a copy in a variety of formats.<hr width=100% />
+	
+	<b>Available STAT images:</b>
+	<select id="statImages">
+		{{each statImage}}
+			<option value="${$value.url}">${$value.file}</option>
+		{{/each}}
+	</select>
+	
+	<button id="loadJobStat">Load Image</button><br/>
+	
+	<div style="margin-bottom: 5px;"><b>Currently Showing: </b><span id="currentlyShowingStat">n/a</span></div>
+	
+	<b>Preview (click image for full size):</b>
+	<div id="statPreview">No image selected</div>
+</div>
+</script>
+
+<script id="tmpl-dependencyList" type="x-jquery-tmpl">
+	<div class="tableCell-middle">Dependencies:&nbsp;</div>
+	<div class="tableCell-middle">
+		<select id="job_dependencies" size=5 multiple>
+		{{if activeJobs.length > 0}}
+			{{each activeJobs}}<option value="${$value.JobId}">(${$value.JobId}) ${$value.Name}</option>{{/each}}
+		{{else}}
+			<option></option>
+		{{/if}}
+		</select>
+	</div>
+</script>
+
+<script id="tmpl-quickSubmitScript" type="x-jquery-tmpl">		
+	{{wrap "contentBox"}}
+		<hr width="100%"/>
+		<div id = "existingFileControls">			
+			Script: <input type="text" size="50" id ="quickSubmitScript" name="quickSubmitScript"/> <button id = "loadScript">run script!</button>		
+		</div>
+	
+		<div id = "fileTree"></div>		
+	{{/wrap}}
+</script>
+
+<script id="tmpl-completedJobs" type="x-jquery-tmpl">
+	{{wrap "contentBox"}}
+	<div id = "completedJobsWrapper">
+		<h2>Job table</h2> <hr width = 100%/>
+		View jobs completed from the past:
+		<select id="pastCompletedDays">
+			<option value = "1">1</option>
+			<option value = "2">2</option>
+			<option value = "3">3</option>
+			<option value = "7">7</option>
+			<option value = "14">14</option>
+			<option value = "30">30</option>
+		</select> day(s)		
+		<table id = "completedJobsTable" class = "display" width = "100%">
+			<thead>
+				<tr>
+					{{each headers}}
+					<th>${$value}</th>
+					{{/each}}							
+				</tr>
+			</thead>
+			<tbody>
+				{{each rows}}
+				<tr>				
+					<td>${$value.JobID}</td>
+					<td>${$value.JobName}</td>
+					<td>${$value.State}</td>
+					<td>${$value.Cluster}</td>
+					<td>${$value.Elapsed}</td>
+					
+					<td>${$value.Partition}</td>
+					<td>${$value.Account}</td>
+					<td>${$value.CPUTime}</td>
+					<td>${$value.AllocCPUS}</td>
+					<td>${$value.End}</td>
+					<td>${$value.JobScheduler}</td>
+					<td>${$value.JobSubmitter}</td>
+					<td>${$value.NNodes}</td>
+					<td>${$value.NTasks}</td>
+					<td>${$value.NodeList}</td>
+					<td>${$value.Timelimit}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+	{{/wrap}}
+</script>
+
+<script id="tmpl-completedJobDetails" type="x-jquery-tmpl">
+	<div id = "completedJobDetailsWrapper">
+		<h2>Job Details (${jobName})</h2><hr width = 100% />
+		<div id = "completedDetailsPane">
+			<span id = "completedJobButtons" class = "ui-widget-header ui-corner-all">
+				Completed Job Operations:
+					{{each opButtons}}
+						<button id="${$value.id}">${$value.text}</button>
+						{{if subMenu}}
+							<ul id = "${menuId}" class="popup-menu">
+								{{each subMenu}}
+								<li><a>${$value}</a></li>
+								{{/each}}				
+							</ul>
+						{{/if}}
+					{{/each}}			
+				</span>
+		
+			{{tmpl "#tmpl-jobFields"}}
+		</div>
+	</div>
+</script>

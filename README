@@ -1,0 +1,106 @@
+
+
+Welcome to OpenLorenz, the open source version of the Lorenz suite of tools
+developed at Lawrence Livermore National Laboratory. The goal of Lorenz is to
+use modern web technologies to make HPC easier.
+
+Two of the tools in the suite are available in OpenLorenz -- the dashboard and
+the job management tool. The dashboard provides a customizable, personalized
+view of what's going on in the HPC center. The job management tool helps users
+submit and manage their batch jobs.
+
+
+Deploying Open Lorenz out-of-the-box (using the hardwired 'fake' data)
+======================================================================
+
+Apache httpd.conf mods:
+--------------------------------------------------
+Inside the relevant <Directory /> tag...
+Options ExecCGI
+
+Also, uncomment if necessary:
+AddHandler cgi-script .cgi
+
+Perl dependencies:
+--------------------------------------------------
+Install with 'cpan' utility preferably, with dependencies enabled:
+
+Class::Delegator
+Date::Format
+HTML::Template
+HTTP::BrowserDetect
+JSON
+Redis
+
+
+Modify paths in the OpenLorenz code to match your site
+------------------------------------------------------
+Makefile		(Fix 2 variables)
+mylc/mylc.cgi		(Fix path in begin block)
+lora/lora.cgi		(Fix path in begin block)
+server/lib/perl/Lorenz/DependencyManager.pm
+			(Fix 3 paths)
+
+Then...
+--------------------------------------------------
+untar into htdocs/lorenz
+make fixperms
+
+try loading:  http://<yourserver>/lorenz/mylc/mylc.cgi
+
+
+Porting Overview
+=============================
+
+Once the default OpenLorenz instance is running, turning the fake data into real
+data from your computer center is the next task.
+
+One finds wide variability in how authentication, user data, resource
+management, and all the other key information associated with a computer center
+are handled. Lorenz was built to operate within the Livermore Computing center
+at LLNL, but is structured to support porting to other sites. Lorenz features a
+number of APIs, including a REST API upon which the web services are built. The
+REST API is how the client (browser-based) code interacts with the web server
+and ultimately the HPC resources. This API is called LORA, for LOrenz Rest Api,
+and is conceptually based on the NERSC Web Toolkit, NEWT.
+
+OpenLorenz is shipped with stubbed-out versions of these endpoints, which return
+properly formatted but fake (hard-wired) data. This gives the porter an idea of
+the expected data for each web service.
+
+The main tasks for porting are:
+
+(1) Go through all of the pertinent REST endpoints used by the dashboard and job
+management tool, and replace the fake data with code that collects real data
+from your site. In particular, this will include server/lib/perl/Lorenz/*.pm and
+server/lib/perl/Lorenz/REST/*.pm. See the technical report "Lorenz APIs and LORA
+REST Services" for more details.
+
+(2) For each portlet in the dashboard, modify the displayed data and labels to
+match what is used at your site.
+
+
+Web Server Dependencies
+=======================
+
+At LLNL, Lorenz makes use of an Apache web server that is tightly integrated
+with the rest of the Livermore Computer center. The web server shares a security
+infrastructure with the HPC resources, meaning that CGI scripts run on the web
+server have the ability to access other services and clusters on behalf of the
+user. This is done by using an Apache module that creates Kerberos credentials
+that are cached for each user when they authenticate with their one-time
+password. The suexec module executes cgi scripts as each individual user, and
+the scripts are run with the user's security credentials. Lorenz server code can
+then make LDAP queries or ssh directly to HPC resources as the user, and launch
+commands, retrieve data, and perform other actions for the user.
+
+While suexec and Kerberos are not requirements for Lorenz to function at your
+site, you do need to find a way to do something equivalent _if_ you want to
+perform actions on behalf of the users. If you only want to show generic status
+and other information in the dashboard, it's not necessary to integrate the web
+server into your security and cluster environment.
+
+Another useful capability is to have a storage area for each user. At LLNL we do
+this by mounting the users' home directories on the web server, so that Lorenz
+can store preferences, cached data, and temporary files there. A separate
+filesystem or a database would also work for this purpose.

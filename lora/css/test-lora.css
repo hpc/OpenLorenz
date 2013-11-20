@@ -1,0 +1,51 @@
+.testLoraTable td{
+    padding-bottom: 5px;
+}
+
+.keyValDiv{
+    padding-top: 5px;
+}
+
+#test-output{
+    overflow: auto;
+}
+
+.test-icon{
+    margin: 2px;
+    padding: 4px 4px;
+    position: relative;
+    float: left;
+    cursor: pointer;
+}
+
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; background-color: white !important; color: black !important;}
+.string { color: green !important;}
+.number { color: darkorange !important;}
+.boolean { color: blue !important;}
+.null { color: magenta !important;}
+.key { color: red !important;}
+
+.loading {
+    background-image: url('../../images/ajax-loader.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 31px;
+	background-color: white;
+}
+
+.ui-autocomplete{
+    max-height: 200px;
+    overflow: auto;
+}
+
+pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.ui-button {
+	font-size: 12px;
+}

@@ -1,0 +1,3 @@
+table.rowSelectable tbody tr{
+    cursor: pointer;
+}

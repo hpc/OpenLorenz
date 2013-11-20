@@ -1,0 +1,1 @@
+var MyLCDirective = angular.module('mylc.directives', []);

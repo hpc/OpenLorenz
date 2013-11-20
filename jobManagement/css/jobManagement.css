@@ -1,0 +1,288 @@
+.interfacePane{
+    margin: 10px 0px 100px 0px;
+}
+
+#jobManagementToolbar{
+    padding: 11px 14px;
+    font-size: 1.2em;
+    display: inline-block;
+}
+
+#configurationMenu, #deleteConfMenu, #masterCheckbox-popup, #signalMenu{
+    z-index: 1000;
+    display: none;
+}
+
+#signalMenu{
+    left: 277px;
+}
+
+#configurationMenu{
+    left: 377px;
+    top: 85px;
+}
+
+#deleteConfMenu{
+    left: 440px;
+    top: 85px;
+}
+
+#jobManager{
+    margin: 10px 0px 0px 10px;    
+}
+
+#activeJobsPane, #completedJobsPane{    
+    min-width: 800px;
+	margin-right: 10px;
+}
+
+#changeUserPane{
+    width: 600px;
+}
+
+#changeUserInput{
+    margin-right: 10px;
+}
+
+#detailsPane{
+    padding: 0px;
+}
+
+#highcharts{
+    margin: 10px 0px 0px 0px;
+    height: 400px;
+    width: 975px;
+}
+
+#jobDetailsWrapper, #completedJobDetailsWrapper{
+    margin-top: 20px;
+}
+
+#activeJobButtons, #createNewJobOptions, #completedJobButtons{
+    display: inline-block;
+    font-size: 12px;
+    margin-bottom: 10px;
+    padding: 7px 11px;
+}
+
+#fileLoadPane{
+    min-width: 580px;
+	width: 580px;	
+}
+
+#existingFileControls{
+    margin-bottom: 10px;
+}
+
+#jumpToSelect{
+    margin-right: 10px;
+}
+
+#jobDetailsTable td, #additionalDetailsTable td{
+    padding: 0 0 3px 0;
+	word-wrap: break-word;
+}
+
+#launchDirBrowserFileTree{
+	width: 550px;
+}
+
+#jobDetailsTable, #additionalDetailsTable{
+	table-layout: fixed;
+}
+
+#additionalDetails{
+    display: none;
+    margin-top: 5px;
+}
+
+.inlineBlock{
+    display: inline-block;
+}
+
+#createNewJobPane{
+    width: 1000px;
+}
+
+#holdAllSelected{	
+    margin-left: -1px;
+}
+
+#masterCheckbox-menu{
+	margin-left: -5px;
+}
+
+#masterCheckbox-button{
+	height: 24px;
+	vertical-align: top;
+	cursor: default;
+}
+
+@-moz-document url-prefix() {
+    #masterCheckbox-button {
+        height: 26px;
+    }
+}
+
+.ui-button-text{
+	line-height: 16px !important;
+}
+
+#refreshJobData{
+	height: 26px;
+}
+
+#masterCheckbox-button input{
+	cursor: pointer;
+}
+
+#masterCheckbox-popup, #masterCheckbox-popup .ui-menu{
+	width: 140px;
+}
+
+#jobTable{
+	text-align: left;
+}
+
+#newJobTable td{
+    padding-bottom: 10px;
+}
+
+#newJobForm{
+    position: relative;
+}
+
+.display-none{
+    display: none;
+}
+
+.inputDescText{
+    font-size: 10px;
+}
+
+.clusterDetailInfo{
+    font-size: 12px;
+}
+
+.ui-button{
+    font-size: 12px;
+}
+.ui-menu { width: 200px; position: absolute; }
+
+.advancedOption{
+    visibility: hidden;
+}
+
+.errorText{
+    color: red;
+}
+
+.tableCell-middle{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#editJobForm table td{
+	padding-bottom: 5px;
+}
+
+.completedJobRow td{
+	background-color: green !important;
+    color: white !important;
+}
+
+.canceledJobRow td{
+	background-color: red !important;
+}
+
+/*
+	This is a temporary fix to a bug with having ui-menu's embedded into ui-widget-header elements
+	Bug post: http://forum.jquery.com/topic/jquery-ui-1-9-contextual-menu-css-bug-within-ui-widget-header
+*/
+.ui-widget-header a{
+	color: inherit;
+}
+
+#jobSuccessTable td{
+	padding-bottom: 5px;
+}
+
+#statPreview {
+	text-align: center;
+}
+
+.statPreviewImg{
+	cursor: pointer;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.ui-menu, .ui-menu a{
+	font-size: 12px;
+	font-weight: normal;
+	border-radius: 0px;
+}
+
+.ui-menu .ui-icon {
+    left: 0.2em;
+    position: absolute;
+    top: 0.2em;
+}
+
+.ui-menu .ui-menu-icon {
+    float: right;
+    position: static;
+}
+
+.ColVis{
+	float: none !important;
+	font-family: inherit;
+	margin-bottom: 0 !important;
+}
+
+.DTTT_container{
+	font-family: inherit;
+	float: none;
+}
+
+.DTTT_button{
+	height: 28px !important;
+	font-family: "century gothic", "arial", "serif";
+}
+
+.ColVis_Button {
+    cursor: pointer;
+    height: 28px;
+    margin-right: 3px;
+    padding: 3px 10px;
+    position: relative;
+	font-family: "century gothic", "arial", "serif";
+}
+
+.ColVis_collection, .ColVis_collection  .ColVis_Button{
+	width: 141px !important;
+}
+
+/*turns off annoying fade for TableTools*/
+div.DTTT_collection_background, div.ColVis_collectionBackground{
+	opacity: 0 !important;
+}
+
+.display th{
+	text-align: left;
+}
+
+.jobTable-toolbar td{
+	padding-right: 5px;
+}
+
+#staleDataNotice {
+	color: red;
+	margin-left: 10px;
+}
+
+#jobOptionsFeedback{
+    margin-left: 10px;
+    padding: 10px;
+    display: none;
+}

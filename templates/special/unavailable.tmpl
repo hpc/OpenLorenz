@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title><TMPL_VAR NAME = "title"></title>
+    <link rel="icon" type="image/png" href="<TMPL_VAR NAME = "webRoot">/images/favicon.png" />
+        
+	<link id="jqueryUiCss" rel="StyleSheet" type="text/css" media="screen" href="<TMPL_VAR NAME="currentThemePath">" />
+
+    <TMPL_LOOP NAME = "css">
+        <link <TMPL_IF NAME = "hasId">id="<TMPL_VAR NAME="id">"</TMPL_IF>rel="StyleSheet" type="text/css" media="<TMPL_VAR NAME="media" DEFAULT=screen>" href="<TMPL_VAR NAME = "cssFile">" />
+    </TMPL_LOOP>
+</head>
+<body>
+    
+<div class="wrapper">
+	<input type="hidden" name="levelsFromLorenzRoot" value="<TMPL_VAR NAME = "levelsFromRoot">"/>
+	
+    <div class="ui-state-error" style="margin: 10px; padding: 10px; font-size: 14px;">
+        <div style="text-decoration: underline;font-size: 22px; margin-bottom: 10px;">MyLC is currently unavailable</div>
+        
+        <div>
+            <TMPL_VAR NAME="disableMessage" DEFAULT="Sorry for any inconvenience.  We will be back as soon as possible.">
+        </div>
+    </div>
+        
+    <TMPL_IF NAME='lorenzAdmin'>
+        <div class="ui-state-highlight" style="margin: 10px; padding: 10px; font-size: 14px;">
+            Oh, hi there.  I see you're a Lorenz admin.  I suppose you want to enable the site now.  You can either:
+			
+			<ul style="list-style: disc; margin-left: 25px; margin-top: 10px;">
+				<li><a id="reenableMylC" href="#">Click Here</a></li>
+				<li>Delete the mylc disabled file (devMylcDisabled or mylcDisabled) in /usr/global/tools/lorenz/data</li>
+				<li>Click "Re-Enable MyLC" from the <a href="<TMPL_VAR NAME="webRoot">/admin/apps/alerts/alerts.cgi">MyLC Alerts utility</a></li>
+			</ul>
+        </div>
+    </TMPL_IF>
+</div>
+	
+	<TMPL_LOOP NAME = "js">
+        <script type="text/javascript" src="<TMPL_VAR NAME = "jsFile">"> </script>
+    </TMPL_LOOP>
+	
+	<script>
+		$('#reenableMylC').click(function(e){
+			$.ajax({
+                type: 'DELETE',
+                url: '<TMPL_VAR NAME="webRoot">/lora/lora.cgi/support/mylcToggle'
+            })
+            .done(function(o){
+                if(o.status === 'OK'){
+                    alert('MyLC successfully enabled.')
+                    window.location.reload();
+                }
+                else{
+                    alert(o.error);
+                }
+            });
+			
+			return false;
+		})
+	</script>
+</body>
+</html>
